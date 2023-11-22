@@ -37,7 +37,7 @@ export default function SwiperComponent() {
           <div className="flex items-center w-[550px] mx-auto justify-center">
             <img
               className="  py-12 object-contain rounded-lg"
-              src="light.PNG"
+              src="ventes.PNG"
               alt=""
             />
           </div>
@@ -53,7 +53,7 @@ export default function SwiperComponent() {
           <div className="flex items-center w-[550px] mx-auto justify-center">
             <img
               className="  py-12 object-contain rounded-lg"
-              src="ventes.PNG"
+              src="fou.PNG"
               alt=""
             />
           </div>
@@ -70,7 +70,7 @@ export default function SwiperComponent() {
           <div className="flex items-center w-[550px] mx-auto justify-center">
             <img
               className="py-12 object-contain rounded-lg"
-              src="dark.PNG"
+              src="four.PNG"
               alt=""
             />
           </div>
