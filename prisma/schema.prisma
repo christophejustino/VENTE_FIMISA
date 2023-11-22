@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Compte {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  pseudo String @unique
+  email String @unique
+  image String?
+  clerkId String
+  serviceId String @db.ObjectId
+  services Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+}
+
+
+model Service {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  nom_ser String
+  image String?
+  recettes Recette[]
+  compte Compte[]
+  produits Produit[]
+}
+
+model Recette{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  qte_vendu Int
+  qte_recu Int
+  serviceId String @db.ObjectId
+  services Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  calendrierRecette Calendrier[] @relation("RecetteCalendrier")
+}
+
+
+model Calendrier {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  date_paiement DateTime @default(now())
+  recetteId String @db.ObjectId
+  recette Recette @relation("RecetteCalendrier", fields: [recetteId], references: [id], onDelete: Cascade)
+  produitId String @db.ObjectId
+  produit Produit @relation("ProduitCalendrier", fields: [produitId], references: [id], onDelete: Cascade)
+}
+
+model Produit {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  design String
+  pu Float
+  qte_stock Int
+  serviceId String @db.ObjectId
+  services Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  calendrierProduit Calendrier[] @relation("ProduitCalendrier")
+}
+
+
